@@ -1,0 +1,19 @@
+.highlight {
+  border-radius: 0.4rem;
+  color: white;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.bold {
+  padding-left: 0rem;
+  font-weight: 700;
+}
+.blue {
+  background-color: grey;
+}
+.red {
+  background-color: lightcoral;
+}
+.green {
+  background-color: salmon;
+}
