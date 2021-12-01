@@ -57,11 +57,11 @@ if METHOD == "RDF2Vec":
         st.markdown("<b>ARTICLES</b>", unsafe_allow_html=True)
         for j in buff:
             if counter == 0:
-                locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=True)
+                locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=True, key=f"{i}_{j}")
             else:
-                locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=False)
+                locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=False, key=f"{i}_{j}")
             counter += 1
-        locals()[f"{i}_CM_OTHERS"] = st.multiselect("Other:", article_lst, help = "Choose one/multiple articles")
+        locals()[f"{i}_CM_OTHERS"] = st.multiselect("Other:", article_lst, help = "Choose one/multiple articles", key=i)
         # ARTICLES = f"<div align='right'><span class='highlight red'><span class='bold'>ARTICLES: </span>{buff}</span></div>"
         st.markdown("---")
 else:
