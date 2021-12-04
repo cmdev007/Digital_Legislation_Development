@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from load_css import local_css
 
-df = pd.read_csv("pyrdf2vec.csv")
 article_lst = ['1', '2', '2A', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18',
                '19', '20', '21', '21A', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '31A', '31B', '31C',
                '31D', '32', '32A', '33', '34', '35', '36', '37', '38', '39', '39A', '40', '41', '42', '43', '43A',
@@ -44,6 +43,7 @@ local_css("style.css")
 backslash_char = "\\"
 METHOD = st.sidebar.radio("", ("RDF2Vec", "Word2Vec", "FastText/BERT/GPT"))
 if METHOD == "RDF2Vec":
+    df = pd.read_csv("pyrdf2vec.csv")
     for i in range(df.shape[0]):
         # st.write(df['news'].values[i])
         # st.write(" ".join(eval(df['articles'].values[i])))
@@ -62,6 +62,28 @@ if METHOD == "RDF2Vec":
                 locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=False, key=f"{i}_{j}")
             counter += 1
         locals()[f"{i}_CM_OTHERS"] = st.multiselect("Other:", article_lst, help = "Choose one/multiple articles", key=i)
+        # ARTICLES = f"<div align='right'><span class='highlight red'><span class='bold'>ARTICLES: </span>{buff}</span></div>"
+        st.markdown("---")
+elif METHOD=="Word2Vec":
+    df = pd.read_csv("word2vec.csv")
+    for i in range(df.shape[0]):
+        # st.write(df['news'].values[i])
+        # st.write(" ".join(eval(df['articles'].values[i])))
+        # st.markdown("---")
+
+        NEWS = f"<div align='justify: inter-word;><span class='highlight blue'><span class='bold'>NEWS-{i + 1}: </span>{df['news'].values[i]}</span></div>"
+        st.markdown(NEWS, unsafe_allow_html=True)
+        buff = eval(df['articles'].values[i])
+        counter = 0
+        st.write("")
+        st.markdown("<b>ARTICLES</b>", unsafe_allow_html=True)
+        for j in buff:
+            if counter == 0:
+                locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=True, key=f"{i}_{j}")
+            else:
+                locals()[f'{i}_CM_{j}'] = st.checkbox(j, value=False, key=f"{i}_{j}")
+            counter += 1
+        locals()[f"{i}_CM_OTHERS"] = st.multiselect("Other:", article_lst, help="Choose one/multiple articles", key=i)
         # ARTICLES = f"<div align='right'><span class='highlight red'><span class='bold'>ARTICLES: </span>{buff}</span></div>"
         st.markdown("---")
 else:
