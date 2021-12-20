@@ -85,7 +85,7 @@ else:
 
 if 0 < counter < MAX+1:
     IN1.info("Which Articles do you think are related with this news? Please select from below!")
-    IN2.info("You can select more Articles also, Use the same dropdown menu.")
+    IN2.info("You can select more than one Article.")
     TXT = df['news'].values[counter - 1]
     NEWS = f"<div align='justify: inter-word;><span class='highlight blue'><span class='bold'>NEWS-{counter}: </span>{TXT}</span></div>"
     NC.markdown(NEWS, unsafe_allow_html=True)
