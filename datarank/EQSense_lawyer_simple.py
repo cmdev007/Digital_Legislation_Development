@@ -54,6 +54,8 @@ FB = st.empty()
 NC = st.empty()
 st.write("")
 st.write("")
+IN1 = st.empty()
+IN2 = st.empty()
 AN = st.empty()
 df = pd.read_csv("pyrdf2vec.csv")
 app_state = st.experimental_get_query_params()
@@ -82,6 +84,8 @@ else:
     lname = app_state['lname'][0]
 
 if 0 < counter < MAX+1:
+    IN1.info("Which Articles do you think are related with this news? Please select from below!")
+    IN2.info("You can select more Articles also, Use the same dropdown menu.")
     TXT = df['news'].values[counter - 1]
     NEWS = f"<div align='justify: inter-word;><span class='highlight blue'><span class='bold'>NEWS-{counter}: </span>{TXT}</span></div>"
     NC.markdown(NEWS, unsafe_allow_html=True)
